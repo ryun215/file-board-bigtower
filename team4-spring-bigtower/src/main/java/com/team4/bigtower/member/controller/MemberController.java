@@ -24,14 +24,18 @@ public class MemberController {
 	@RequestMapping(value = "/memberAdd", method = RequestMethod.POST)
 	public String memberAdd(Member member) {
 		logger.info("memberAdd() POST");
-		memberService.memberAdd(member);
-		return "redirect:/member/memberLogin";
+		int result = memberService.memberAdd(member);
+		if(result !=0){
+			logger.info("회원가입성공!");
+			return "redirect:/memberLogin";
+		}
+		return "/member/memberAdd";
 	}
 	
 	@RequestMapping(value = "/memberLogin", method = RequestMethod.GET)
 	public String memberLogin() {
 		logger.info("memberLogin() GET");
 		
-		return "";
+		return "/member/memberLogin";
 	}
 }
